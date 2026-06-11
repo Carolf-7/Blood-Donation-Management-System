@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Management - Blood Donation System</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-brand">
+          <h1>🩸 Blood Donation Management System</h1>
+        </div>
+        <ul class="nav-links">
+          <li><a href="/">Dashboard</a></li>
+          <li><a href="/donors">Donors</a></li>
+          <li><a href="/hospitals" class="active">Hospitals</a></li>
+          <li><a href="/donations">Donations</a></li>
+          <li><a href="/requests">Requests</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      <div class="page-header">
+        <h2>Hospital Management</h2>
+        <button id="add-hospital-btn" class="btn btn-primary">
+          Add New Hospital
+        </button>
+      </div>
+
+      <!-- Add/Edit Hospital Form (Hidden by default) -->
+      <div
+        id="hospital-form-section"
+        class="form-section"
+        style="display: none"
+      >
+        <div class="form-container">
+          <h3 id="form-title">Add New Hospital</h3>
+          <form id="hospital-form">
+            <input type="hidden" id="hospital-id" />
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="name">Hospital Name *</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+
+              <div class="form-group">
+                <label for="contact-number">Contact Number *</label>
+                <input
+                  type="tel"
+                  id="contact-number"
+                  name="contact_number"
+                  required
+                />
+              </div>
+
+              <div class="form-group full-width">
+                <label for="location">Location/Address *</label>
+                <textarea
+                  id="location"
+                  name="location"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">
+                Save Hospital
+              </button>
+              <button type="button" id="cancel-form" class="btn btn-secondary">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Hospitals List -->
+      <div id="hospitals-section">
+        <div class="search-section">
+          <input
+            type="text"
+            id="search-hospitals"
+            placeholder="Search hospitals by name or location..."
+          />
+        </div>
+
+        <div class="table-container">
+          <table id="hospitals-table">
+            <thead>
+              <tr>
+                <th>Hospital Name</th>
+                <th>Location</th>
+                <th>Contact Number</th>
+                <th>Registration Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="5" class="loading">Loading hospitals...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Blood Donation Management System. Saving lives, one donation
+        at a time.
+      </p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+      // Load hospitals when page loads
+      document.addEventListener("DOMContentLoaded", () => {
+        loadHospitals();
+        setupHospitalFormHandlers();
+      });
+    </script>
+  </body>
+</html>

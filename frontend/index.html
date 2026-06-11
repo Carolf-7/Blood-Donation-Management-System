@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blood Donation Management System</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-brand">
+          <h1>🩸 Blood Donation Management System</h1>
+        </div>
+        <ul class="nav-links">
+          <li><a href="/" class="active">Dashboard</a></li>
+          <li><a href="/donors">Donors</a></li>
+          <li><a href="/hospitals">Hospitals</a></li>
+          <li><a href="/donations">Donations</a></li>
+          <li><a href="/requests">Requests</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      <div class="dashboard">
+        <h2>Dashboard</h2>
+        <p class="subtitle">Welcome to the Blood Donation Management System</p>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-content">
+              <h3 id="total-donors">-</h3>
+              <p>Total Donors</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">🏥</div>
+            <div class="stat-content">
+              <h3 id="total-hospitals">-</h3>
+              <p>Registered Hospitals</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">🩸</div>
+            <div class="stat-content">
+              <h3 id="total-donations">-</h3>
+              <p>Total Donations</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">📋</div>
+            <div class="stat-content">
+              <h3 id="pending-requests">-</h3>
+              <p>Pending Requests</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-sections">
+          <div class="section">
+            <h3>Quick Actions</h3>
+            <div class="action-buttons">
+              <a href="/donors" class="btn btn-primary">Add New Donor</a>
+              <a href="/hospitals" class="btn btn-secondary">Add Hospital</a>
+              <a href="/donations" class="btn btn-success">Record Donation</a>
+              <a href="/requests" class="btn btn-warning">Blood Requests</a>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>Recent Activities</h3>
+            <div id="recent-activities" class="activity-list">
+              <p class="loading">Loading recent activities...</p>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>Blood Group Statistics</h3>
+            <div id="blood-group-stats" class="stats-table">
+              <p class="loading">Loading blood group statistics...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Blood Donation Management System. Saving lives, one donation
+        at a time.
+      </p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+      // Load dashboard data when page loads
+      document.addEventListener("DOMContentLoaded", () => {
+        loadDashboardStats();
+        loadRecentActivities();
+        loadBloodGroupStats();
+      });
+    </script>
+  </body>
+</html>

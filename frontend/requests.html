@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blood Requests - Blood Donation System</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-brand">
+          <h1>🩸 Blood Donation Management System</h1>
+        </div>
+        <ul class="nav-links">
+          <li><a href="/">Dashboard</a></li>
+          <li><a href="/donors">Donors</a></li>
+          <li><a href="/hospitals">Hospitals</a></li>
+          <li><a href="/donations">Donations</a></li>
+          <li><a href="/requests" class="active">Requests</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      <div class="page-header">
+        <h2>Blood Requests Management</h2>
+        <button id="add-request-btn" class="btn btn-primary">
+          Create New Request
+        </button>
+      </div>
+
+      <!-- Add/Edit Request Form (Hidden by default) -->
+      <div id="request-form-section" class="form-section" style="display: none">
+        <div class="form-container">
+          <h3 id="form-title">Create New Blood Request</h3>
+          <form id="request-form">
+            <input type="hidden" id="request-id" />
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="hospital-select">Hospital *</label>
+                <select id="hospital-select" name="hospital_id" required>
+                  <option value="">Select Hospital</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="blood-group">Blood Group *</label>
+                <select id="blood-group" name="blood_group" required>
+                  <option value="">Select Blood Group</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="quantity">Quantity (ml) *</label>
+                <input
+                  type="number"
+                  id="quantity"
+                  name="quantity_ml"
+                  min="250"
+                  step="50"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="request-date">Request Date *</label>
+                <input
+                  type="date"
+                  id="request-date"
+                  name="request_date"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">
+                Submit Request
+              </button>
+              <button type="button" id="cancel-form" class="btn btn-secondary">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Requests List -->
+      <div id="requests-section">
+        <div class="controls-section">
+          <div class="search-section">
+            <input
+              type="text"
+              id="search-requests"
+              placeholder="Search by hospital name or blood group..."
+            />
+          </div>
+          <div class="filter-section">
+            <select id="status-filter">
+              <option value="">All Statuses</option>
+              <option value="Pending">Pending</option>
+              <option value="Fulfilled">Fulfilled</option>
+            </select>
+            <select id="blood-group-filter">
+              <option value="">All Blood Groups</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pending-requests-section">
+          <h3>🚨 Urgent Pending Requests</h3>
+          <div id="pending-requests" class="urgent-requests">
+            <p class="loading">Loading pending requests...</p>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table id="requests-table">
+            <thead>
+              <tr>
+                <th>Request Date</th>
+                <th>Hospital</th>
+                <th>Location</th>
+                <th>Blood Group</th>
+                <th>Quantity (ml)</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="7" class="loading">Loading blood requests...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Blood Donation Management System. Saving lives, one donation
+        at a time.
+      </p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+      // Load requests when page loads
+      document.addEventListener("DOMContentLoaded", () => {
+        loadRequests();
+        loadPendingRequests();
+        setupRequestFormHandlers();
+        loadHospitalsForRequests(); // Load hospitals for dropdown
+      });
+    </script>
+  </body>
+</html>
