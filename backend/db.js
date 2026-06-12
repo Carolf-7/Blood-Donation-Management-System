@@ -4,7 +4,7 @@ const mysql = require("mysql2/promise");
 const dbConfig = {
   host: "localhost",
   user: "root",
-  password: "GAGANHEGDE14", // Replace with your actual MySQL password
+  password: "", // 
   database: "blood_donation_db",
   port: 3306,
 };
